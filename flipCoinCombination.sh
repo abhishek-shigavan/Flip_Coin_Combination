@@ -1,7 +1,5 @@
 #!/bin/bash -x
 
-#!/bin/bash -x
-
 isHead=0
 isTail=1
 isHH=00
@@ -33,6 +31,8 @@ tttCounter=0
 tthCounter=0
 thtCounter=0
 thhCounter=0
+
+maxResult=0
 
 declare -A result_dictonary
 
@@ -198,3 +198,16 @@ winningPercentage_dictonary["TTH"]="$tthPercentage"
 winningPercentage_dictonary["THT"]="$thtPercentage"
 winningPercentage_dictonary["THH"]="$thhPercentage"
 
+for key in ${!winningPercentage_dictonary[@]}
+do
+        resultCount=${winningPercentage_dictonary[$key]}
+
+        if [ $resultCount -ge $maxResult ]
+        then
+                maxResult=$resultCount
+                maxKey=$key
+                maxValue=${winningPercentage_dictonary[$key]}
+        fi
+done
+
+echo " The Winning Combination is $maxKey with winning percentage $maxValue %  "
